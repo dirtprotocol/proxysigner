@@ -1,0 +1,14 @@
+{
+  "name": "proxysigner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dirtprotocol/proxysigner.git",
+  "author": "Dirt Protocol",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "web3": "^1.0.0-beta.55"
+  },
+  "devDependencies": {}
+}
