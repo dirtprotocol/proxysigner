@@ -31,7 +31,7 @@ async function fetchData(params) {
   const ticker = await coinbase.fetchTicker(pair)
   return {
     market: ticker.symbol,
-    price: ticker.last.toString(),
+    price: web3.utils.toWei(ticker.last.toString()),
     timestamp: ticker.timestamp * 1000
   }
 }
@@ -43,5 +43,6 @@ exports.main = async (req, res) => {
     data.timestamp,
     data.market
   )
-  res.send(Object.assign(data, signedData))
+  data.signature = signedData
+  res.send(data)
 };

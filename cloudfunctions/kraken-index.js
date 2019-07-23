@@ -16,7 +16,7 @@ const web3 = new Web3(provider)
 
 function signAndPackPrice(price, timestamp, market) {
   let dataHash = web3.utils.soliditySha3(
-    {t: 'uint256', v: web3.utils.toWei(price)},
+    {t: 'uint256', v: price},
     {t: 'uint256', v: timestamp},
     {t: 'bytes32', v: web3.utils.asciiToHex(market)
   })
@@ -31,7 +31,7 @@ async function fetchData(params) {
   const json = await ret.json()
   return {
     market: 'ETH/USD',
-    price: json.result[pair].c[0],
+    price: web3.utils.toWei(json.result[pair].c[0]),
     timestamp: new Date().getTime()
   }
 }
@@ -39,9 +39,10 @@ async function fetchData(params) {
 exports.main = async (req, res) => {
   const data = await fetchData(req.query)
   const signedData = signAndPackPrice(
-    data.price, 
+    data.price,
     data.timestamp,
     data.market
   )
-  res.send(Object.assign(data, signedData))
+  data.signature = signedData
+  res.send(data)
 };
