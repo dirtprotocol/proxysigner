@@ -14,7 +14,7 @@ app.get('/', async (req, res) => {
     data.timestamp,
     data.market
   )
-  res.send(signedData)
+  res.send(Object.assign(data, signedData))
 })
 
 // This is specific to the source that is being proxied. Replace this with

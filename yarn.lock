@@ -394,6 +394,11 @@ camelcase@^3.0.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
   integrity sha1-MvxLn82vhF/N9+c7uXysImHwqwo=
 
+ccxt@^1.18.968:
+  version "1.18.968"
+  resolved "https://registry.yarnpkg.com/ccxt/-/ccxt-1.18.968.tgz#bbfbf41b68616db9629dbfd5da994d1612122ab3"
+  integrity sha512-Acvcg5Q1V7m7CImSUPenIODohGavo/8KdsJqWmQm1qMnlHMgCkn3K7hKlEN/S53KlHq2kdrTHsuJyQ2Cbrbksw==
+
 chokidar@^2.0.0:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"

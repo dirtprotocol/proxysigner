@@ -7,6 +7,8 @@
 
 const Web3 = require('web3')
 const fetch = require('node-fetch')
+const Ccxt = require('ccxt')
+const coinbase = new Ccxt.coinbase()
 
 const provider = new Web3.providers.HttpProvider(
   process.env.WEB3_PROVIDER_URL,
@@ -26,13 +28,11 @@ function signAndPackPrice(price, timestamp, market) {
 
 async function fetchData(params) {
   const pair = params.pair
-  const url = `https://api.kraken.com/0/public/Ticker?pair=${pair}`
-  const ret = await fetch(url)
-  const json = await ret.json()
+  const ticker = await coinbase.fetchTicker(pair)
   return {
-    market: pair,
-    price: json.result[pair].c[0],
-    timestamp: new Date().getTime()
+    market: ticker.symbol,
+    price: ticker.last.toString(),
+    timestamp: ticker.timestamp * 1000
   }
 }
 
@@ -43,5 +43,5 @@ exports.main = async (req, res) => {
     data.timestamp,
     data.market
   )
-  res.send(signedData)
+  res.send(Object.assign(data, signedData))
 };
