@@ -31,7 +31,8 @@ async function fetchData(params) {
   const ticker = await coinbase.fetchTicker(pair)
   return {
     market: ticker.symbol,
-    price: web3.utils.toWei(ticker.last.toString()),
+    price: ticker.last.toString(),
+    price_wei: web3.utils.toWei(ticker.last.toString()),
     timestamp: ticker.timestamp * 1000
   }
 }

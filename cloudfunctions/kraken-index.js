@@ -31,7 +31,8 @@ async function fetchData(params) {
   const json = await ret.json()
   return {
     market: 'ETH/USD',
-    price: web3.utils.toWei(json.result[pair].c[0]),
+    price: json.result[pair].c[0],
+    price_wei: web3.utils.toWei(json.result[pair].c[0]),
     timestamp: new Date().getTime()
   }
 }
