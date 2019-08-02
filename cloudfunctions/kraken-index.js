@@ -14,6 +14,11 @@ const provider = new Web3.providers.HttpProvider(
 )
 const web3 = new Web3(provider)
 
+const metrics = require('opencensusz')
+let account = web3.eth.accounts.privateKeyToAccount(process.env.PROXY_SECRET_KEY).address
+const mStatus = new metrics.PushCounter('status', 'Report status', 'proxysigner', account, { source: 'kraken' })
+
+
 function signAndPackPrice(price, timestamp, market) {
   let dataHash = web3.utils.soliditySha3(
     {t: 'uint256', v: price},
@@ -37,7 +42,7 @@ async function fetchData(params) {
   }
 }
 
-exports.main = async (req, res) => {
+async function main(req, res) {
   const data = await fetchData(req.query)
   const signedData = signAndPackPrice(
     data.price,
@@ -45,5 +50,15 @@ exports.main = async (req, res) => {
     data.market
   )
   data.signature = signedData
-  res.send(data)
+  res.send(data)  
+}
+
+exports.main = async (req, res) => {
+  try {
+    await main(req, res)
+    await mStatus.increment({ status: 'SUCCESS' })
+  } catch(e) {
+    await mStatus.increment({ status: 'TX_FAIL', error: e.toString() })
+    throw e
+  }
 };
