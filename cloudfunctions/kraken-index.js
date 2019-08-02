@@ -38,14 +38,14 @@ async function fetchData(params) {
     market: 'ETH/USD',
     price: json.result[pair].c[0],
     price_wei: web3.utils.toWei(json.result[pair].c[0]),
-    timestamp: new Date().getTime()
+    timestamp: parseInt((new Date().getTime() / 1000).toFixed(0))
   }
 }
 
 async function main(req, res) {
   const data = await fetchData(req.query)
   const signedData = signAndPackPrice(
-    data.price,
+    data.price_wei,
     data.timestamp,
     data.market
   )

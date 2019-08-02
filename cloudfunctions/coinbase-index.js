@@ -39,14 +39,14 @@ async function fetchData(params) {
     market: ticker.symbol,
     price: ticker.last.toString(),
     price_wei: web3.utils.toWei(ticker.last.toString()),
-    timestamp: ticker.timestamp * 1000
+    timestamp: ticker.timestamp
   }
 }
 
 async function main(req, res) {
   const data = await fetchData(req.query)
   const signedData = signAndPackPrice(
-    data.price, 
+    data.price_wei, 
     data.timestamp,
     data.market
   )
