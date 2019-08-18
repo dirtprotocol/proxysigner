@@ -1,10 +1,12 @@
 ## ProxySigner
 
-A ProxySigner is a utility that fetches and signs message from any API for the [DIRT Protocol Oracle](https://github.com/dirtprotocol/dirtoracle). Read the [protocol design](https://github.com/dirtprotocol/dirtoracle/blob/master/Protocol-Design.md) for details on a how ProxySigner works.
+A ProxySigner is a utility that fetches and signs message from any API for the [DIRT Protocol Oracle](https://github.com/dirtprotocol/dirtoracle). 
 
 This ProxySigner repo fetches data from cryptocurrency exchanges using the [Cryptocurrency Exchange Trading Library - CCXT](https://github.com/ccxt/ccxt#supported-cryptocurrency-exchange-markets). There are two methods in `index.js`: 
 * `signAndPackPrice` - signs the message using your [private key](#generate-private-key). Allows onchain verification that that the message came from an approved source using your public key.
 * `fetchData` - pulls data from cryptocurrency exchanges using CCXT. Modify this section to fetch data from other sources. 
+
+For more details on the role of the ProxySigner in the DIRT Oracle network, read the [protocol design](https://github.com/dirtprotocol/dirtoracle/blob/master/Protocol-Design.md).
 
 ## Generate public / private key
 
