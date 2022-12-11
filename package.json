@@ -8,7 +8,7 @@
   "dependencies": {
     "@dirt/cloudsecret": "0.0.0-beta.4",
     "ccxt": "^1.18.1059",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "opencensusz": "0.0.5-beta.4",
     "web3": "^1.0.0-beta.55"
   },
